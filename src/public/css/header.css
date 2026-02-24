@@ -1,0 +1,14 @@
+.header {
+    background-color: #000000;
+    height: 50px;
+    line-height: 50px;
+}
+
+.header-logo {
+    margin: 0;
+}
+
+.header-logo__img {
+    margin-left: 20px;
+    width: 300px;
+}
