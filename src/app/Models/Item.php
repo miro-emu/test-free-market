@@ -16,7 +16,7 @@ class Item extends Model
 
     public function categories()
     {
-        return $this->hasMany(Category::class, 'item_id');
+        return $this->belongsToMany(Category::class);
     }
 
     public function user()

@@ -31,7 +31,10 @@
         </div>
         
     </form>
-    <a href="/login">ログインはこちら</a>
+    <div class="register-item__link">
+        <a class="login-link" href="/login">ログインはこちら</a>
+    </div>
+    
 </div>
 
 @endsection

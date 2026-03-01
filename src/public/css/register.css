@@ -1,24 +1,46 @@
 .register-content {
     /* background-color: blueviolet; */
-    text-align: center;
+    /* text-align: center; */
+    width: 700px;
+    margin: 0 auto;
 }
 .register-title {
     font-size: 35px;
+    text-align: center;
 }
 .register-form__group {
     /* background-color: aqua; */
-    width: 800px;
-    margin: 0 auto;
-    padding-bottom: 20px;
+    width: 100%;
+    margin-bottom: 30px;
 }
 .register-form__label {
     display: block;
-    text-align: left;
     font-size: 20px;
     font-weight: bold;
 }
 .register-form__input {
     width: 100%;
     height: 50px;
+    border-radius: 5px;
     display: block;
+}
+.register-form__button {
+    margin-top: 60px;
+}
+.register-form__button-submit{
+    width: 100%;
+    height: 60px;
+    background-color: #e65e5e;
+    border: 1px solid #e65e5e;
+    border-radius: 5px;
+    color: #ffff;
+    font-size: 20px;
+}
+.register-item__link {
+    text-align: center;
+    margin-top: 30px;
+}
+.login-link {
+    text-decoration: none;
+    font-size: 18px;
 }

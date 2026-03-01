@@ -1,7 +1,9 @@
 .header {
     background-color: #000000;
     height: 50px;
-    line-height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header-logo {
@@ -11,4 +13,36 @@
 .header-logo__img {
     margin-left: 20px;
     width: 300px;
+}
+
+.header-nav {
+    display: flex;
+}
+
+.header-nav__item {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.header-nav__logout {
+    border: none;
+    background-color: #00000000;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.header-nav__mypage {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.header-nav__list {
+    text-decoration: none;
+    background-color: #ffffff;
+    color: #000000;
+    display: block;
+    width: 60px;
+    height: 30px;
+    border-radius: 2px;
+    padding-left: 13px;
 }

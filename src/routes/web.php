@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,5 @@ Route::get('/', function () {
 
 // Route::get('/register',[LoginController::class, 'register']);
 Route::get('/login',[LoginController::class, 'login']);
+Route::get('/item',[ItemController::class, 'items']);
+Route::get('/item/{item_id}', [ItemController::class, 'getDetail']);
