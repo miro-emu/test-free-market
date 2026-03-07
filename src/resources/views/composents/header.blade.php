@@ -30,7 +30,7 @@
                         <a class="header-nav__mypage" href="/mypage">マイページ</a>
                     </li>
                     <li class="header-nav__item">
-                        <a class="header-nav__list" href="/mypage">出品</a>
+                        <a class="header-nav__list" href="/sell">出品</a>
                     </li>
                     @endif
                 </ul>

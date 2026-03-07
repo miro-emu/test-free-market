@@ -4,3 +4,56 @@
     height: 40px; 
     border-radius: 2px;
 }
+.serch-keyword::placeholder {
+    color: #000000;
+}
+
+.top-contents{
+    display: flex;
+    border-bottom: 2px solid #181818;
+    height: 80px;
+    padding-top: 40px;
+}
+
+.recommend-link {
+    text-decoration: none;
+    color: #585858;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 200px; 
+}
+
+.mylist-link {
+    text-decoration: none;
+    color: #ff0000;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 100px;
+}
+
+.items-contents {
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: justify;
+}
+
+.item-card {
+    margin-left: 50px;
+    margin-bottom: 50px;
+    width: 300px;
+}
+
+.item-img {
+    width: 100%;
+}
+
+.item-link {
+    text-decoration: none;
+    font-size: 20px;
+    color: #000000;
+}
+
+.item-name {
+    margin-top: 0;
+}

@@ -8,15 +8,21 @@
 <div class="login-content">
     <h2 class="login-title">ログイン</h2>
 
-    <form action="/login" method="post">
+    <form action="/login" method="post" @submit.prevent novalidate>
         @csrf
         <div class="login-form__group">
             <label class="login-form__label" for="email">メールアドレス</label>
             <input class="login-form__input" type="email" name="email" id="email">
+            @error('email')
+            <p class="error">{{ $message }}</p>
+            @enderror
         </div>
         <div class="login-form__group">
             <labe class="login-form__label" for="password">パスワード</labe>
             <input class="login-form__input" type="text" name="password" id="password">
+            @error('password')
+            <p class="error">{{ $message }}</p>
+            @enderror
         </div>
         <div class="login-form__button">
             <button class="login-form__button-submit" type="submit">ログインする</button>

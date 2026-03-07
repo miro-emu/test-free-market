@@ -50,3 +50,7 @@
     text-decoration: none;
     font-size: 18px;
 }
+
+.error {
+    color: #ff0000
+}
