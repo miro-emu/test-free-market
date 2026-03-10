@@ -23,12 +23,21 @@ class PurchaseController extends Controller
 
     public function createAddress(Request $request)
     {
-        Address::create([
-        'user_id' => Auth::id(),
-        'postal_code' => $request->postal_code,
-        'address_line' => $request->address_line,
-        'building' => $request->building
-        ]);
+        // Address::create([
+        // 'user_id' => Auth::id(),
+        // 'postal_code' => $request->postal_code,
+        // 'address_line' => $request->address_line,
+        // 'building' => $request->building
+        // ]);
+
+        $address->create(
+            ['type' => Address::TYPE_SHIPPING],
+            [
+                'postal_code' => $request->postal_code,
+                'address_line' => $request->address_line,
+                'building' => $request->building
+            ]
+        );
 
         return redirect('/item/'.$item_id);
     }

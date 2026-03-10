@@ -6,6 +6,7 @@
 
 @section('header')
 <form action="/search" class="header-item__serch">
+    @csrf
     <input type="text" name="keyword" placeholder="なにをお探しですか？" class="serch-keyword">
     <button type="submit" style="display:none">検索</button> 
 </form>
@@ -73,7 +74,7 @@
         <div class="comment-user">
             <div class="user-icon__default">
                 @if ($comment->user->image)
-                <img class="commemt-user-icon" src="{{ Storage::url($comment->user->image) }}" alt="ユーザーアイコン">
+                <img class="commemt__user-icon" src="{{ Storage::url($comment->user->image) }}" alt="ユーザーアイコン">
                 @endif
             </div>
             <p class="comment-user__name">{{ $comment->user->name }}</p>
@@ -84,7 +85,7 @@
         <form class="commemt-form" action="/comment/{{ $item->id }}" method="POST">
             @csrf
             <label class="commemt-form__label" for="comment">商品へのコメント</label>
-            <textarea class="commemt-form__textarea" name="comment" id="comment"></textarea>
+            <textarea class="commemt-form__textarea" name="content" id="comment"></textarea>
             @error('content')
             <p class="error">{{ $message }}</p>
             @enderror

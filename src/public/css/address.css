@@ -1,0 +1,54 @@
+.serch-keyword {
+    border: 1px solid #ffff;
+    width: 400px;
+    height: 40px;
+    border-radius: 2px;
+}
+
+.serch-keyword::placeholder {
+    color: #000000;
+}
+
+.address-content {
+    width: 700px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.address-title {
+    font-size: 35px;
+    text-align: center;
+}
+
+.address-form__group {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.address-form__label {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.address-form__input {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    display: block;
+}
+
+.address-form__button-submit {
+    width: 100%;
+    height: 60px;
+    background-color: #e65e5e;
+    border: 1px solid #e65e5e;
+    border-radius: 5px;
+    color: #ffff;
+    font-size: 20px;
+    margin-top: 70px;
+}
+
+.error {
+    color: #ff0000
+}

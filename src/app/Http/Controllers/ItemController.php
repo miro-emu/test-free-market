@@ -68,10 +68,9 @@ class ItemController extends Controller
         Comment::create([
         'user_id' => Auth::id(),
         'item_id' => $item_id,
-        'content' => $request->comment
+        'content' => $request->content
         ]);
-
-        return redirect('/purchase/{item_id}'.$item_id);
+        return redirect('/item/'.$item_id);
     }
 
 
@@ -96,5 +95,11 @@ class ItemController extends Controller
         session()->flash('success', 'You Unliked the Item.');
 
         return redirect()->back();
+    }
+
+    // 出品
+    public function sell()
+    {
+        return view('list');
     }
 }
