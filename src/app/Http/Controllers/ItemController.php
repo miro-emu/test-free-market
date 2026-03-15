@@ -13,26 +13,27 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
-    // ログイン時のみ有効
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth', 'verified'])->only(['like', 'unlike']);
-    // }
-
     // 商品一覧
     public function index(Request $request)
-    {
+    {   
+        $items = Item::with('order')
+            ->where('user_id','!=',Auth::id())
+            ->get();
 
         if ($request->tab === 'mylist'){
             if (!Auth::check()) {
-                return redirect('/login');
+                $items = collect();
             }
             $items = Item::whereHas('likes', function ($query) {
                 $query->where('user_id', Auth::id());
             })->get();
         }
          else {
-            $items = Item::where('user_id', '!=', Auth::id())->get();
+            if (Auth::check()) {
+                $items = Item::where('user_id', '!=', Auth::id())->get();
+            } else {
+                $items = Item::all();
+            }
         }
 
         return view('items',compact('items'));
@@ -64,6 +65,10 @@ class ItemController extends Controller
     // コメント
     public function createComment(CommentRequest $request,$item_id)
     {
+        if (!Auth::check()) {
+                return redirect('/login');
+            }
+
         $item = Item::with('comments.user')->findOrFail($item_id);
         Comment::create([
         'user_id' => Auth::id(),
@@ -77,6 +82,10 @@ class ItemController extends Controller
     // いいね機能
     public function like($id)
     {
+        if (!Auth::check()) {
+                return redirect('/login');
+            }
+
         Like::create([
         'item_id' => $id,
         'user_id' => Auth::id(),
@@ -100,6 +109,32 @@ class ItemController extends Controller
     // 出品
     public function sell()
     {
-        return view('list');
+        if (!Auth::check()) {
+                return redirect('/login');
+            }
+
+        $categories = Category::all();
+        $conditions = Condition::all();
+        return view('sell', compact('categories','conditions'));
+    }
+
+    public function createSell(Request $request)
+    {
+        $form = $request->all();
+        $image = $request->file('image');
+        $path = isset($image) ? $image->store('items', 'public') : '';
+        
+        $item = Item::create([
+            'user_id' => Auth::id(),
+            'name' => $request->name,
+            'image' => $path,
+            'brand' => $request->brand,
+            'price' => $request->price,
+            'description' => $request->description,
+            'condition_id' => $request->condition_id,
+        ]);
+        $item->categories()->sync($request->categories ?? []);
+
+        return redirect('/');
     }
 }

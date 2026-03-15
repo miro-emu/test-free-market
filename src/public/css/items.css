@@ -25,10 +25,15 @@
 
 .mylist-link {
     text-decoration: none;
-    color: #ff0000;
+    color: #585858;
     font-size: 20px;
     font-weight: bold;
     margin-left: 100px;
+}
+
+.active {
+    color: red;
+    font-weight: bold;
 }
 
 .items-contents {
@@ -52,6 +57,22 @@
     text-decoration: none;
     font-size: 20px;
     color: #000000;
+}
+
+.item-image-wrapper {
+    position: relative;
+}
+
+.sold-label {
+    position: absolute;
+    top: 130px;
+    left: 120px;
+    background: red;
+    color: white;
+    padding: 4px 10px;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 4px;
 }
 
 .item-name {

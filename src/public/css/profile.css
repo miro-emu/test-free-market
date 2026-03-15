@@ -9,6 +9,13 @@
     color: #000000;
 }
 
+.profile-content__top {
+    display: flex;
+    width: 1017px;
+    margin: 0 auto;
+    justify-content: space-between;
+    margin-top: 78px;
+}
 
 .edit-item__img {
     display: flex;
@@ -21,6 +28,15 @@
     border-radius: 50%;
 }
 
+.top-item__user-name {
+    font-size: 35px;
+    font-weight: bold;
+    margin-left: -250px;
+}
+
+.top-item__button {
+    margin-top: 35px;
+}
 
 .button__edit {
     display: block;
@@ -34,18 +50,48 @@
     font-size: 20px;
     font-weight: bold;
     padding-top: 6px;
-    padding-left: 25px;
+    padding-left: 30px;
 }
 
+.profile-content__tub {
+    display: flex;
+    border-bottom: 2px solid #181818;
+    height: 80px;
+    padding-top: 40px;
+    margin-top: 50px;
+}
 
-.items-contents {
-    margin-top: 80px;
+.sell-link {
+    text-decoration: none;
+    color: #585858;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 200px;
+}
+
+.buy-link {
+    text-decoration: none;
+    color: #585858;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 100px;
+
+}
+
+.active {
+    color: red;
+    font-weight: bold;
+}
+
+.profile-content__items {
     display: flex;
     flex-wrap: wrap;
     text-align: justify;
+    margin-top: 50px;
 }
 
 .item-card {
+    display: flex;
     margin-left: 50px;
     margin-bottom: 50px;
     width: 300px;

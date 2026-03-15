@@ -24,7 +24,7 @@
 
         <p class="item-name">{{$item->name}}</p> 
         <p class="item-brand">{{$item->brand}}</p>
-        <p class="item-price">￥<span class="item-price__span">{{$item->price}}</span>(税込)</p>
+        <p class="item-price">￥<span class="item-price__span">{{$item->price_formatted}}</span>(税込)</p>
 
         <div class="item-icons">
             <div class="item-icons__likes">

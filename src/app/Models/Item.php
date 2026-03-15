@@ -10,6 +10,16 @@ class Item extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'name',
+        'image',
+        'brand',
+        'price',
+        'description',
+        'condition_id'
+    ];
+
     public function likes()
     {
         return $this->hasMany(Like::class, 'item_id');
@@ -49,6 +59,16 @@ class Item extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
+
+    public function getPriceFormattedAttribute()
+    {
+        return number_format($this->price);
     }
     
 }

@@ -14,15 +14,20 @@
 
 @section('content')
 <div class="top-contents">
-    <a class="recommend-link" href="/">おすすめ</a>
-    <a class="mylist-link" href="/?tab=mylist">マイリスト</a>
+    <a class="recommend-link {{ request('tab') !== 'mylist' ? 'active' : '' }}" href="/">おすすめ</a>
+    <a class="mylist-link {{ request('tab') == 'mylist' ? 'active' : '' }}" href="/?tab=mylist">マイリスト</a>
 </div>
 
 <div class="items-contents">
     @foreach ($items as $item)
     <div class="item-card">
         <a href="{{ url('/item/'.$item->id) }}" class="item-link">
-            <img src="{{ Storage::url($item->image) }}" alt="商品画像" class="item-img" />
+            <div class="item-image-wrapper">
+                <img src="{{ Storage::url($item->image) }}" alt="商品画像" class="item-img" />
+                @if($item->order)
+                <span class="sold-label">Sold</span>
+                @endif
+            </div>
             <p class="item-name">{{$item->name}}</p>
         </a>               
     </div>

@@ -13,19 +13,26 @@
 @endsection
 
 @section('content')
+<div class="profile-content__top">
+    <div class="user-image">
+        @if ($user->image)
+        <img class="edit-user-image" src="{{ Storage::url($user->image) }}" alt="プロフィール画像">
+        @else
+        <img class="edit-user-image__default" src="/images/default.png">
+        @endif
+    </div>
+    <p class="top-item__user-name">{{ $user->name }}</p>
+    <div class="top-item__button">
+        <a class="button__edit" href="/mypage/profile">プロフィールを編集</a>
+    </div>
+</div>
 
-<div class="user-image">
-    @if ($user->image)
-    <img class="edit-user-image" src="{{ Storage::url($user->image) }}" alt="プロフィール画像">
-    @else
-    <img class="edit-user-image__default" src="/images/default.png">
-    @endif
+<div class="profile-content__tub">
+    <a class="sell-link {{ request('page') == 'sell' ? 'active' : '' }}" href="/mypage?page=sell">出品した商品</a>
+    <a class="buy-link {{ request('page') == 'buy' ? 'active' : '' }}" href="/mypage?page=buy">購入した商品</a>
 </div>
-<p>{{ $user->name }}</p>
-<div>
-    <a class="button__edit" href="/mypage/profile">プロフィールを編集</a>
-</div>
-<div>
+
+<div class="profile-content__items">
     @foreach ($items as $item)
     <div class="item-card">
         <a href="{{ url('/item/'.$item->id) }}" class="item-link">

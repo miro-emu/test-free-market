@@ -13,7 +13,9 @@
     <body>
         <header class="header">
             <h1 class="header-logo">
-                <img src="{{ asset('/images/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECHヘッダーロゴ" class="header-logo__img">
+                <a href="/">
+                    <img src="{{ asset('/images/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECHヘッダーロゴ" class="header-logo__img">
+                </a>
             </h1>
             @yield('header')
 

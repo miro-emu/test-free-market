@@ -13,12 +13,17 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     // マイページ
-    public function mypage()
+    public function mypage(Request $request)
     {
         $user = Auth::user();
 
-        // 表示する商品を変える
-        $items = Item::all();
+        if ($request->page === 'buy'){
+            $items = Item::whereHas('order', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })->get();
+        } else {
+                $items = Item::where('user_id' , $user->id)->get();
+            }
 
         return view('profile', compact('user','items'));
     }

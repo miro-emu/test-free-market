@@ -12,7 +12,7 @@
         @csrf
         <div class="login-form__group">
             <label class="login-form__label" for="email">メールアドレス</label>
-            <input class="login-form__input" type="email" name="email" id="email">
+            <input class="login-form__input" type="email" name="email" id="email" value="{{ old('email') }}">
             @error('email')
             <p class="error">{{ $message }}</p>
             @enderror
