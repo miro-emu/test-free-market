@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
+use App\Http\Requests\LoginRequest;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Contracts\RegisterResponse;
 
@@ -56,13 +57,13 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->singleton(RegisterResponse::class, function () {
             return new class implements RegisterResponse {
                 public function toResponse($request){
-                    return redirect('/mypage/profile');
+                    return redirect()->route('verification.notice');
                 }
             };
         });
 
         
-        // $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
+        $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
 
     }
 }

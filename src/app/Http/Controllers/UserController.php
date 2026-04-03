@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AddressRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Models\User;
 use App\Models\Address;
 use App\Models\Item;
@@ -15,6 +16,10 @@ class UserController extends Controller
     // マイページ
     public function mypage(Request $request)
     {
+        if (!Auth::check()) {
+                return redirect('/login');
+            }
+            
         $user = Auth::user();
 
         if ($request->page === 'buy'){
@@ -31,6 +36,10 @@ class UserController extends Controller
     // プロフィール編集画面
     public function edit()
     {
+        if (!Auth::check()) {
+                return redirect('/login');
+            }
+            
         $user = Auth::user();
         $address = $user->addresses()
         ->where('type', Address::TYPE_PROFILE)
@@ -39,7 +48,7 @@ class UserController extends Controller
         return view('edit', compact('user','address'));
     }
 
-    public function updateProfile(AddressRequest $request)
+    public function updateProfile(ProfileRequest $request)
     {
         $user = Auth::user();
         $path = $user->image;

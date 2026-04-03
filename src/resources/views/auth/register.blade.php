@@ -26,14 +26,14 @@
         </div>
         <div class="register-form__group">
             <labe class="register-form__label" for="password">パスワード</labe>
-            <input class="register-form__input" type="text" name="password" id="password">
+            <input class="register-form__input" type="password" name="password" id="password">
             @error('password')
             <p class="error">{{ $message }}</p>
             @enderror
         </div>
         <div class="register-form__group">
             <label class="register-form__label" for="password_confirmation">パスワード確認用</label>
-            <input class="register-form__input" type="text" name="password_confirmation" id="password_confirmation">
+            <input class="register-form__input" type="password" name="password_confirmation" id="password_confirmation">
             @error('password')
             <p class="error">{{ $message }}</p>
             @enderror

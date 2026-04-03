@@ -144,3 +144,11 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+.error {
+    color: #ff0000;
+}
+
+.error-image {
+    color: #ff0000;
+    text-align: center;
+}

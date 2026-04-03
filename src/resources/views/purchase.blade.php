@@ -27,10 +27,13 @@
         <div class="purchase-order">
             <label class="purchase-order__label" for="payment">支払い方法</label>
             <select class="purchase-order__payment" name="payment_method" id="payment">
-                <option disabled selected>選択してください</option>
-                <option class="purchase-order__payment--option" value="convenience">コンビニ払い</option>
-                <option class="purchase-order__payment--option" value="card">カード支払い</option>
+                <option disabled selected value="">選択してください</option>
+                <option class="purchase-order__payment--option" value="1" {{ old('payment_method') == 1 ? 'selected' : '' }}>コンビニ払い</option>
+                <option class="purchase-order__payment--option" value="2" {{ old('payment_method') == 2 ? 'selected' : '' }}>カード支払い</option>
             </select>
+            @error('payment_method')
+            <p class="error">{{ $message }}</p>
+            @enderror
         </div>
         
         <div class="purchase-order">
@@ -40,6 +43,9 @@
                 <p>〒{{$address->postal_code}}</p>
                 <p>{{$address->address_line}}{{$address->building}}</p>
             </div>
+            @error('address')
+                <p class="error">{{ $message }}</p>
+            @enderror
         </div>
     </div>
 
@@ -51,14 +57,17 @@
             </tr>
             <tr>
                 <th class="purchase-table__header">支払い方法</th>
-                <td class="purchase-table__content" id="payment-method">サンプル</td>
+                <td class="purchase-table__content" id="payment-method">コンビニ払い</td>
             </tr>
         </table>
         <button class="purchase-form__button" type="submit">購入する</button>
     </div>
- </form>
+</form>
 
-    <!-- document.getElementById('payment').addEventListener('change', function(){
-    document.getElementById('payment-method').innerText = this.options[this.selectedIndex].text;
-}); -->
+<script>
+    document.getElementById('payment').addEventListener('change', function(){
+        const text = this.options[this.selectedIndex].text;
+        document.getElementById('payment-method').innerText = text;
+    });
+</script>
 @endsection

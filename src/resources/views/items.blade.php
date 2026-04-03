@@ -5,17 +5,23 @@
 @endsection
 
 @section('header')
-<form action="/search" class="header-item__serch">
+<form action="/" method="GET" class="header-item__serch">
     @csrf
-    <input type="text" name="keyword" placeholder="なにをお探しですか？" class="serch-keyword">
+    <input type="text" name="keyword" placeholder="なにをお探しですか？" class="serch-keyword" value="{{ request('keyword') }}">
     <button type="submit" style="display:none">検索</button> 
 </form>
 @endsection
 
 @section('content')
 <div class="top-contents">
-    <a class="recommend-link {{ request('tab') !== 'mylist' ? 'active' : '' }}" href="/">おすすめ</a>
-    <a class="mylist-link {{ request('tab') == 'mylist' ? 'active' : '' }}" href="/?tab=mylist">マイリスト</a>
+    <a class="recommend-link {{ request('tab') !== 'mylist' ? 'active' : '' }}"
+   href="{{ request()->fullUrlWithQuery(['tab' => null]) }}">
+    おすすめ
+    </a>
+    <a class="mylist-link {{ request('tab') == 'mylist' ? 'active' : '' }}"
+    href="{{ request()->fullUrlWithQuery(['tab' => 'mylist']) }}">
+        マイリスト
+    </a>
 </div>
 
 <div class="items-contents">

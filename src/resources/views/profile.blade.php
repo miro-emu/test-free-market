@@ -28,7 +28,7 @@
 </div>
 
 <div class="profile-content__tub">
-    <a class="sell-link {{ request('page') == 'sell' ? 'active' : '' }}" href="/mypage?page=sell">出品した商品</a>
+    <a class="sell-link {{ request('page') !== 'buy' ? 'active' : '' }}" href="/mypage?page=sell">出品した商品</a>
     <a class="buy-link {{ request('page') == 'buy' ? 'active' : '' }}" href="/mypage?page=buy">購入した商品</a>
 </div>
 

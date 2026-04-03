@@ -1,0 +1,48 @@
+.email-content {
+    display: block;
+    width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 230px;
+}
+
+.email-message {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.email-auth__button {margin: 0 auto;
+    width: 257px;
+    height: 69px;
+    background-color: #d9d9d9;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding-top: 15px;
+    margin-top: 60px;
+}
+
+.email-auth__button--link {
+    text-decoration: none;
+    color: #000000;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.email-resend__link {
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-decoration: underline;
+    font-size: 20px;
+    color: #3b93d8;
+    margin-top: 50px;
+}
+
+.alert {
+    color: #ff0000;
+    margin-top: 20px;
+}

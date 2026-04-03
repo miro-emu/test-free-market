@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\ExhibitionRequest;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Condition;
@@ -16,48 +17,38 @@ class ItemController extends Controller
     // 商品一覧
     public function index(Request $request)
     {   
-        $items = Item::with('order')
-            ->where('user_id','!=',Auth::id())
-            ->get();
+         $keyword = $request->input('keyword');
+        $tab = $request->input('tab');
 
-        if ($request->tab === 'mylist'){
+        if ($tab === 'mylist') {
             if (!Auth::check()) {
-                $items = collect();
-            }
-            $items = Item::whereHas('likes', function ($query) {
-                $query->where('user_id', Auth::id());
-            })->get();
-        }
-         else {
-            if (Auth::check()) {
-                $items = Item::where('user_id', '!=', Auth::id())->get();
+                $query = Item::query()->whereRaw('0 = 1'); 
             } else {
-                $items = Item::all();
+                $query = Item::whereHas('likes', function ($q) {
+                    $q->where('user_id', Auth::id());
+                });
+            }
+        } else {
+            if (Auth::check()) {
+                $query = Item::where('user_id', '!=', Auth::id());
+            } else {
+                $query = Item::query();
             }
         }
 
-        return view('items',compact('items'));
-    }
-
-    // 検索機能
-    public function search(Request $request)
-    {
-        $keyword = $request->input('keyword');
-        $query = Item::query();
-
-        if (!empty($keyword)) {
-            $query->where('name', 'LIKE', "%{$keyword}%");
+        if ($request->filled('keyword')) {
+            $query->where('name', 'LIKE', '%' . $keyword . '%');
         }
 
-        $items = $query->get();
-        return view('items',compact('items'));
-    }
+        $items = $query->with('order')->get();
 
+        return view('items', compact('items', 'keyword', 'tab'));
+    }
+    
     // 商品詳細
     public function getDetail($item_id)
     {
         $item=Item::with(['categories','condition','comments.user'])->findOrFail($item_id);
-        // $comments = Comment::all();
 
         return view('detail', compact('item'));
     }
@@ -98,6 +89,10 @@ class ItemController extends Controller
 
     public function unlike($id)
     {
+        if (!Auth::check()) {
+                return redirect('/login');
+            }
+
         $like = Like::where('item_id', $id)->where('user_id', Auth::id())->first();
         $like->delete();
 
@@ -118,7 +113,7 @@ class ItemController extends Controller
         return view('sell', compact('categories','conditions'));
     }
 
-    public function createSell(Request $request)
+    public function createSell(ExhibitionRequest $request)
     {
         $form = $request->all();
         $image = $request->file('image');
@@ -133,7 +128,7 @@ class ItemController extends Controller
             'description' => $request->description,
             'condition_id' => $request->condition_id,
         ]);
-        $item->categories()->sync($request->categories ?? []);
+        $item->categories()->sync($request->category_ids ?? []);
 
         return redirect('/');
     }

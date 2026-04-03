@@ -20,9 +20,9 @@
         <div class="edit-item__img">
             <div class="user-image">
                 @if ($user->image)
-                <img class="edit-user-image" src="{{ Storage::url($user->image) }}" alt="プロフィール画像">
+                <img class="edit-user-image" id="image-preview" src="{{ Storage::url($user->image) }}" alt="プロフィール画像">
                 @else
-                <img class="edit-user-image__default" src="/images/default.png">
+                <img class="edit-user-image__default" id="image-preview" src="/images/default.png">
                 @endif
             </div>
             <div class="img-upload__group">
@@ -64,4 +64,21 @@
         <button class="edit-form__button" type="submit">更新する</button>
     </form>
 </div>
+
+<script>
+document.getElementById('file_upload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById('image-preview');
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            preview.src = event.target.result;
+        }
+
+        reader.readAsDataURL(file);
+    }
+});
+</script>
 @endsection
