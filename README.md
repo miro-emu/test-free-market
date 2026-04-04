@@ -43,10 +43,39 @@ php artisan migrate
 php artisan db:seed
 ```
 
+7. シンボリックリンク作成
+``` bash
+php artisan storage:link
+```
+
 ## 使用技術(実行環境)
 - PHP 8.1.34
 - Laravel 8.83.29
 - MySQL 8.0.26
+
+## メール確認（MailHog）
+- .env の以下を変更
+MAIL_FROM_ADDRESS=test123@test.com
+※ 実際のメール送信は行われません
+
+## ⚠️ 決済機能（Stripe）について
+- .env に以下を設定
+STRIPE_SECRET=your_secret
+※ セキュリティのため、APIキーは各自で発行してください
+
+- Stripe CLIを使用してWebhookを受信します。
+1. Stripe CLIでログイン
+stripe login
+2. Webhookを起動
+stripe listen --forward-to http://localhost/stripe/webhook
+3. 表示されたWebhookシークレットを `.env` に設定
+STRIPE_WEBHOOK_SECRET=whsec_xxx
+※ Webhookシークレットはstripe listenを再起動するたびに変更されます
+
+## テスト
+```bash
+php artisan test
+```
 
 ## ER図
 ![alt](test-free-market.png)
@@ -56,3 +85,16 @@ php artisan db:seed
 - 会員登録画面 : http://localhost/register
 - phpMyAdmin：http://localhost:8080/
 - mailfog : http://localhost:8025/#
+
+
+### Stripe Webhook（ローカル開発）
+
+Stripe CLIを使用してWebhookを受信します。
+
+1. Stripe CLIでログイン
+stripe login
+2. Webhookを起動
+stripe listen --forward-to http://localhost/stripe/webhook
+3. 表示されたWebhookシークレットを `.env` に設定
+STRIPE_WEBHOOK_SECRET=whsec_xxx
+※ Webhookシークレットはstripe listenを再起動するたびに変更されます

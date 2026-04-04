@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Item;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Condition;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Database\Seeders\ConditionsTableSeeder;
@@ -19,14 +21,12 @@ class SellTest extends TestCase
 
     public function test_can_create_item()
     {
-        $this->seed([
-            ConditionsTableSeeder::class,
-            CategoriesTableSeeder::class,
-        ]);
-
         Storage::fake('public');
 
         $user = User::factory()->create();
+
+        $condition = Condition::factory()->create();
+        $categories = Category::factory()->count(2)->create();
 
         $data = [
             'name' => 'Test Name',
@@ -34,8 +34,8 @@ class SellTest extends TestCase
             'brand' => 'Test brand',
             'price' => 1000,
             'description' => 'Test Description',
-            'condition_id' => 1,
-            'category_ids' => [1, 2],
+            'condition_id' => $condition->id,
+            'category_ids' => $categories->pluck('id')->toArray(),
         ];
 
         $response = $this->actingAs($user)
@@ -47,11 +47,11 @@ class SellTest extends TestCase
 
         $this->assertDatabaseHas('items', [
             'name' => 'Test Name',
-            'condition_id' => 1,
+            'condition_id' => $condition->id,
         ]);
 
         $this->assertDatabaseHas('category_item', [
-            'category_id' => 1,
+            'category_id' => $categories[0]->id,
         ]);
     }
 }
