@@ -108,4 +108,27 @@ class PurchaseTest extends TestCase
             'address_id' => $address->id,
         ]);
     }
+
+    // 決済方法の反映
+    public function test_payment_method_is_sent_correctly()
+    {
+        $user = User::factory()->create();
+
+        $item = Item::factory()->create();
+
+        $address = Address::factory()->create([
+            'user_id' => $user->id,
+            'type' => Address::TYPE_PROFILE,
+        ]);
+
+        $response = $this->actingAs($user)->post('/purchase/' . $item->id, [
+            'payment_method' => 1, // コンビニ払い
+        ]);
+
+        $this->assertDatabaseHas('orders', [
+            'user_id' => $user->id,
+            'item_id' => $item->id,
+            'payment_method' => 1,
+        ]);
+    }
 }

@@ -33,17 +33,12 @@ DB_PASSWORD=laravel_pass
 php artisan key:generate
 ```
 
-6. マイグレーションの実行
+6. マイグレーションとシーディングの実行
 ``` bash
-php artisan migrate
+php artisan migrate:fresh --seed
 ```
 
-7. シーディングの実行
-``` bash
-php artisan db:seed
-```
-
-8. シンボリックリンク作成
+7. シンボリックリンク作成
 ``` bash
 php artisan storage:link
 ```
