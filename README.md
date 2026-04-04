@@ -43,7 +43,7 @@ php artisan migrate
 php artisan db:seed
 ```
 
-7. シンボリックリンク作成
+8. シンボリックリンク作成
 ``` bash
 php artisan storage:link
 ```
