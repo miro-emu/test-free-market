@@ -55,24 +55,30 @@ php artisan storage:link
 
 ## メール確認（MailHog）
 - .env の以下を変更
+``` text
 MAIL_FROM_ADDRESS=test123@test.com
+```
 ※ 実際のメール送信は行われません
 
-## ⚠️ 決済機能（Stripe）について
+## 決済機能（Stripe）について
 - .env に以下を設定
+``` text
 STRIPE_SECRET=your_secret
+```
 ※ セキュリティのため、APIキーは各自で発行してください
 
 - Stripe CLIを使用してWebhookを受信します。
 1. Stripe CLIでログイン
-stripe login
+`stripe login`
 2. Webhookを起動
-stripe listen --forward-to http://localhost/stripe/webhook
-3. 表示されたWebhookシークレットを `.env` に設定
+`stripe listen --forward-to http://localhost/stripe/webhook`
+3. 表示されたWebhookシークレットを .env に設定
+``` text
 STRIPE_WEBHOOK_SECRET=whsec_xxx
+```
 ※ Webhookシークレットはstripe listenを再起動するたびに変更されます
 
-## テスト
+## 機能テスト
 ```bash
 php artisan test
 ```
@@ -85,16 +91,3 @@ php artisan test
 - 会員登録画面 : http://localhost/register
 - phpMyAdmin：http://localhost:8080/
 - mailfog : http://localhost:8025/#
-
-
-### Stripe Webhook（ローカル開発）
-
-Stripe CLIを使用してWebhookを受信します。
-
-1. Stripe CLIでログイン
-stripe login
-2. Webhookを起動
-stripe listen --forward-to http://localhost/stripe/webhook
-3. 表示されたWebhookシークレットを `.env` に設定
-STRIPE_WEBHOOK_SECRET=whsec_xxx
-※ Webhookシークレットはstripe listenを再起動するたびに変更されます
